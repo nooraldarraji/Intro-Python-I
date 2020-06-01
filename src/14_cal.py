@@ -30,3 +30,26 @@ it should use today’s date to get the month and year.
 import sys
 import calendar
 from datetime import datetime
+
+calendar.setfirstweekday(calendar.SUNDAY)
+date, cal = datetime, calendar
+caly, calm = date.now().strftime('%Y'), date.now().strftime('%m')
+
+
+def date_time(month=calm, year=caly):
+    # [month] [year]
+    marg, yarg = sys.argv[1], sys.argv[2]
+    m = len(marg)
+    y = len(yarg)
+
+    if m > 0 or m <= 2 and y == 0:  # if no year
+        return cal.month(int(year), int(marg))
+    elif y == 4 and m < 1:  # if no month
+        return cal.month(int(yarg), int(month))
+    elif y != 4 and m < 1:
+        return cal.month(int(year), int(month))
+    else:
+        print('Usage: [month] [year]')
+
+
+print(date_time(sys.argv[1], sys.argv[2]))
